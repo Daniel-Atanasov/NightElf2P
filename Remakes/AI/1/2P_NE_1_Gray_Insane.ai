@@ -1,0 +1,15 @@
+//=================================================================\\
+// 2P-Campaign NightElf 01, Gray AI, InsaneMode                    \\
+//=================================================================\\
+
+function main takes nothing returns nothing
+
+    call CampaignAI(HOUSE,null)
+    call SetPeonsRepair(true)
+    call SetBuildUnit(3, PEASANT)
+
+    set campaign_wood_peons = 3
+	set campaign_gold_peons = 0
+
+    call SleepForever()
+endfunction

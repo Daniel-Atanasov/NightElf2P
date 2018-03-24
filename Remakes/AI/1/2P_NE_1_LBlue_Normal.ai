@@ -1,0 +1,59 @@
+//=================================================================\\
+// 2P-Campaign NightElf 01, Light Blue AI, Normal Mode             \\
+//=================================================================\\
+globals
+    player user1 = Player(1)
+    player user2 = Player(2)
+endglobals
+
+function main takes nothing returns nothing
+    call CampaignAI(HOUSE, null)
+	call SetReplacementCount(3)
+
+    call SetBuildUnit(5, PEASANT)
+
+	call CampaignDefender(EASY, 1, FOOTMEN)	
+	call CampaignDefender(EASY, 1, RIFLEMAN)
+	
+	call WaitForSignal()
+
+	// *** WAVE 1 ***
+	call InitAssaultGroup()
+    call SetAssaultGroup(5, 5, FOOTMAN)
+    call SuicideOnPlayer(0, user1)
+
+	call SetBuildUpgr(1, UPG_MELEE)
+	call SetBuildUpgr(1, UPG_ARMOR)
+
+	// *** WAVE 2 ***
+	call InitAssaultGroup()
+	call SetAssaultGroup(6, 6, RIFLEMAN)
+    call SuicideOnPlayer(M6, user2)
+
+	call SetBuildUpgr(1, UPG_LEATHER)
+	call SetBuildUpgr(1, UPG_RANGED)
+
+	// *** WAVE 3 ***
+	call InitAssaultGroup()
+    call SetAssaultGroup(6, 6, FOOTMAN)
+	call SetAssaultGroup(3, 3, RIFLEMAN)
+    call SuicideOnPlayer(M6, user1)
+
+	call SetBuildUpgr(1, UPG_GUN_RANGE)
+
+
+	loop
+		// *** WAVE 4+ ***
+		call InitAssaultGroup()
+		call SetAssaultGroup(4, 4, FOOTMAN)
+		call SetAssaultGroup(3, 3, RIFLEMAN)
+		call SuicideOnPlayer(M6, user2)
+
+		// *** WAVE 5+ ***
+		call InitAssaultGroup()
+		call SetAssaultGroup(5, 5, FOOTMAN)
+		call SetAssaultGroup(2, 2, RIFLEMAN)
+		call SuicideOnPlayer(M6, user1)
+
+	endloop
+endfunction
